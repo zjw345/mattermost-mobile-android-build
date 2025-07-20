@@ -23,11 +23,9 @@ RUN             mkdir -p "/usr/share/man/man1" && \
                 usbutils \
                 vim
 
-RUN             echo "deb https://deb.nodesource.com/node_20.x bookworm main" > "/etc/apt/sources.list.d/nodesource.list" && \
-                echo "deb-src https://deb.nodesource.com/node_20.x bookworm main" >> "/etc/apt/sources.list.d/nodesource.list" && \
-                curl -sSL "https://deb.nodesource.com/gpgkey/nodesource.gpg.key" | apt-key add - && \
-                apt-get update && \
-                apt-get install -y nodejs npm
+# 更新后的部分 - 替代原来的Node.js安装
+RUN curl -fsSL "https://deb.nodesource.com/setup_20.x" | bash - && \
+    apt-get install -y nodejs
 
 RUN             npm -g install react-native-cli
 
